@@ -1,5 +1,5 @@
 from flask import Flask, redirect, url_for, session, request, jsonify
-from flask_oauthlib.client import OAuth
+# from flask_oauthlib.client import OAuth
 from flask import render_template
 
 import pprint
@@ -15,20 +15,20 @@ app = Flask(__name__)
 app.debug = True #Change this to False for production
 
 app.secret_key = os.environ['SECRET_KEY'] 
-oauth = OAuth(app)
+# oauth = OAuth(app)
 
 # set up github as oauth provider
-github = oauth.remote_app(
-    'github',
-    consumer_key=os.environ['GITHUB_CLIENT_ID'], 
-    consumer_secret=os.environ['GITHUB_CLIENT_SECRET'],
-    request_token_params={'scope': 'user:email'}, #request read-only access to the user's email.  For a list of possible scopes, see developer.github.com/apps/building-oauth-apps/scopes-for-oauth-apps
-    base_url='https://api.github.com/',
-    request_token_url=None,
-    access_token_method='POST',
-    access_token_url='https://github.com/login/oauth/access_token',  
-    authorize_url='https://github.com/login/oauth/authorize' #URL for github's OAuth login
-)
+# github = oauth.remote_app(
+#     'github',
+#     consumer_key=os.environ['GITHUB_CLIENT_ID'], 
+#     consumer_secret=os.environ['GITHUB_CLIENT_SECRET'],
+#     request_token_params={'scope': 'user:email'}, #request read-only access to the user's email.  For a list of possible scopes, see developer.github.com/apps/building-oauth-apps/scopes-for-oauth-apps
+#     base_url='https://api.github.com/',
+#     request_token_url=None,
+#     access_token_method='POST',
+#     access_token_url='https://github.com/login/oauth/access_token',  
+#     authorize_url='https://github.com/login/oauth/authorize' #URL for github's OAuth login
+# )
 
 
 @app.context_processor
