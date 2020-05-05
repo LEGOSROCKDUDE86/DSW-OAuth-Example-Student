@@ -1,7 +1,7 @@
 from flask import Flask, redirect, url_for, session, request, jsonify
 from flask_oauthlib.client import OAuth
 from flask import render_template
-
+from flask import flash
 import pprint
 import os
 
@@ -59,13 +59,16 @@ def authorized():
             #save user data and set log in message
             session['github_token'] = (resp['access_token'], '')
             session['user_data'] = github.get('user').data
-            message = 'You were succesfully logged in as ' + session['user_data']['login'] + '.'
+            message = 'you were successfully logged in as' + session['user_data']['login'] +'.'
+            
         except Exception as inst:
             #clear the session and give error message
             session.clear()
             print(inst)
-            message = 'Unable to login. Please try again.'
-    return render_template('message.html', message=message)
+            message = "Unable to login. Please try again."
+    flash(message)
+    #return render_template('message.html', message=message)
+    return render_template('home.html')
 
 
 @app.route('/page1')
